@@ -18,14 +18,14 @@ if req.status_code == 200:
     theater_times = data.select(".theater-times")
     for info in theater_times:
       film_times = data.select(".times-options")
-      for time in film_times:
+      film_languages = list(map(lambda span: span.text ,data.select(".times-labels.times-labels-right li span")))
+      
+      for i, time in enumerate(film_times):
         time_option = ", ".join(map(lambda span: span.text , time.select("li span")))
-        film_languages = ", ".join(map(lambda span: span.text ,data.select(".times-labels.times-labels-right li span")))
         print(time_option)
-        print(film_languages, "\n")
+        print(film_languages[i], "\n")
       print("===============================================================")
 
-    # TODO - add languages
     # TODO - add link
     # TODO - write results into file 
     # display_results(title, times)
