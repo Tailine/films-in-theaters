@@ -14,9 +14,18 @@ if req.status_code == 200:
     # get film title
     title = data.select('h3 a')[0].text
     # get film times
-    film_times = data.select(".times-options li span")
-    times = ", ".join(list(map(lambda html: html.text, film_times)))
-    
+    print(title)
+    theater_times = data.select(".theater-times")
+    for info in theater_times:
+      film_times = data.select(".times-options")
+      for time in film_times:
+        time_option = ", ".join(map(lambda span: span.text , time.select("li span")))
+        film_languages = ", ".join(map(lambda span: span.text ,data.select(".times-labels.times-labels-right li span")))
+        print(time_option)
+        print(film_languages, "\n")
+      print("===============================================================")
+
+    # TODO - add languages
     # TODO - add link
     # TODO - write results into file 
-    display_results(title, times)
+    # display_results(title, times)
